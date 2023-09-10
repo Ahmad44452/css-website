@@ -1,0 +1,18 @@
+.Dropdown-root {
+  font-size: 1.8rem;
+}
+
+.Dropdown-control {
+  background-color: #fff;
+  color: #000;
+  height: auto;
+  border: none;
+  font-family: "Inter", sans-serif;
+  padding: 1rem 1rem;
+}
+
+.Dropdown-arrow {
+  margin-top: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}

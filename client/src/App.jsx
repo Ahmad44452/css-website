@@ -17,7 +17,10 @@ import {
   UploadImage,
   SubmitButton,
   SubmissionError,
+  SubmissionSuccess,
+  LoadingScreen,
 } from "./components/homeForm";
+import axios from "axios";
 
 const batchOptions = [
   "Select your batch",
@@ -42,8 +45,10 @@ const App = () => {
   });
 
   const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
 
   const [pfpImage, setPfpImage] = useState([]);
+  const [isLoading, setLoading] = useState(false);
 
   const onPfpImageChange = (imageList, addUpdateIndex) => {
     // data for submit
@@ -57,6 +62,9 @@ const App = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError(null);
+    setSuccess(null);
 
     if (formData.firstName === "") {
       setError("Please enter first name");
@@ -85,12 +93,31 @@ const App = () => {
       setError("Please upload your image");
       return;
     }
-
-    console.log(formData);
+    // console.log(formData);
+    axios
+      .post(
+        `${import.meta.env.VITE_BACKEND_HOST}/api/form/addsubmission`,
+        formData
+      )
+      .then(() => {
+        setSuccess("Your applications has been received");
+      })
+      .catch((error) => {
+        // console.log(error)
+        setError(error.response.data.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return (
     <>
+      {isLoading && (
+        <LoadingScreen>
+          <span></span>
+        </LoadingScreen>
+      )}
       <FullPageNavbar />
       <HomeFormContainer>
         <HomeForm onSubmit={handleSubmit}>
@@ -254,7 +281,9 @@ const App = () => {
             </ImageUploading>
           </InputContainer>
 
-          <SubmissionError>{error}</SubmissionError>
+          {error && <SubmissionError>{error}</SubmissionError>}
+
+          {success && <SubmissionSuccess>{success}</SubmissionSuccess>}
 
           <InputContainer $marginBottom={"0px"}>
             <SubmitButton type="submit" />

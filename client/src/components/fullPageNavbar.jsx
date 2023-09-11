@@ -13,7 +13,7 @@ const ArrowStyled = styled.div`
   color: #000;
   position: absolute;
   left: 50%;
-  bottom: 10px;
+  bottom: 50px;
   transform: translateX(-50%);
   animation-name: ${arrowAnimation};
   animation-duration: 2s;

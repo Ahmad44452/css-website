@@ -1,5 +1,38 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import InputMask from "react-input-mask";
+
+const loaderAnimation = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;
+
+export const LoadingScreen = styled.div`
+  z-index: 100;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  span {
+    width: 48px;
+    height: 48px;
+    border: 5px solid #8e2de2;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: ${loaderAnimation} 1s linear infinite;
+  }
+`;
 
 export const HomeFormContainer = styled.div`
   display: flex;
@@ -139,6 +172,13 @@ export const SubmitButton = styled.input`
 
 export const SubmissionError = styled.p`
   color: #ff9b9b;
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 3rem;
+`;
+
+export const SubmissionSuccess = styled.p`
+  color: #a6ff96;
   text-align: center;
   font-size: 1.5rem;
   margin-bottom: 3rem;

@@ -68,29 +68,39 @@ const App = () => {
 
     if (formData.firstName === "") {
       setError("Please enter first name");
+      setLoading(false);
       return;
     } else if (formData.secondName === "") {
       setError("Please enter second name");
+      setLoading(false);
       return;
     } else if (formData.email === "") {
       setError("Please enter email");
+      setLoading(false);
       return;
     } else if (formData.batch === defaultBatchOption) {
       setError("Please select a batch");
+      setLoading(false);
       return;
     } else if (formData.registrationNo === "") {
       setError("Please enter registration number");
+      setLoading(false);
       return;
     } else if (formData.registrationNo.replace("_", "").length !== 12) {
       setError("Please enter valid registration number");
+      setLoading(false);
+      return;
     } else if (formData.phoneNo === "") {
       setError("Please enter phone number");
+      setLoading(false);
       return;
     } else if (formData.phoneNo.replace("_", "").length !== 14) {
       setError("Please enter valid phone number");
+      setLoading(false);
       return;
     } else if (formData.image === "") {
       setError("Please upload your image");
+      setLoading(false);
       return;
     }
     // console.log(formData);
